@@ -52,8 +52,14 @@ class _ProductsViewState extends State<ProductsView> {
             return Column(
               children: [
                 AppBar(
-                  title: Text(widget.category.toUpperCase()),
-                  backgroundColor: Colors.amber,
+                  title: Text(
+                    widget.category.toUpperCase(),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  backgroundColor: Colors.blue.shade900,
                 ),
 
                 Flexible(

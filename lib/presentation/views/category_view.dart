@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_me/config/routes/app_routes.dart';
 import 'package:shop_me/core/utils/data_state.dart';
 import 'package:shop_me/data/models/category_response.dart';
 import 'package:shop_me/presentation/view_models/category_view_model.dart';
@@ -16,7 +18,14 @@ class _CategoryViewState extends State<CategoryView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Categories"), centerTitle: true),
+      appBar: AppBar(
+        title: const Text(
+          "Categories",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.blue.shade900,
+        centerTitle: true,
+      ),
 
       body: Consumer(
         builder: (context, CategoryViewModel categoryViewModel, child) {
@@ -48,12 +57,9 @@ class _CategoryViewState extends State<CategoryView> {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(12),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ProductsView(category: category.name!),
-                        ),
+                      context.pushNamed(
+                        AppRoutes.products,
+                        pathParameters: {"category": category.name!},
                       );
                     },
                     child: Column(
@@ -74,7 +80,6 @@ class _CategoryViewState extends State<CategoryView> {
               },
             );
           }
-
           return SizedBox();
         },
       ),

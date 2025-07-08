@@ -12,12 +12,17 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final ScrollController _scrollController = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text(
+          'Home',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.blue.shade900,
+        centerTitle: true,
+      ),
       body: Consumer<ProductViewModel>(
         builder: (context, ProductViewModel productViewModel, _) {
           if (productViewModel.productsState is LoadingState) {

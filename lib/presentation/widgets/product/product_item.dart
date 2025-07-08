@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shop_me/config/routes/app_routes.dart';
 import 'package:shop_me/data/models/product_response.dart';
-import 'package:shop_me/presentation/view_models/product_view_model.dart';
-import 'package:shop_me/presentation/views/product_details_view.dart';
+
 
 class ProductItem extends StatelessWidget {
   final Product product;
@@ -19,13 +19,9 @@ class ProductItem extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
           onTap: () {
-            // Navigate to ProductDetailsView
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    ProductDetailsView(productId: product.id!),
-              ),
+            context.pushNamed(
+              AppRoutes.productDetails,
+              pathParameters: {"productId": product.id.toString()},
             );
           },
           child: Padding(
@@ -34,7 +30,7 @@ class ProductItem extends StatelessWidget {
               children: [
                 // Product Image
                 Hero(
-                  tag: "product-image",
+                  tag: "product-image-${product.id}",
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.network(

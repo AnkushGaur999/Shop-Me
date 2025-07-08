@@ -34,10 +34,6 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
     return Scaffold(
       body: Consumer<ProductViewModel>(
         builder: (context, ProductViewModel productViewModel, child) {
-          print(
-            "Product Details View state: ${productViewModel.productDetailsState}",
-          );
-
           if (productViewModel.productDetailsState is LoadingState) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -55,7 +51,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                 (productViewModel.productDetailsState as SuccessState).data
                     as Product;
             final price = product.price!;
-            final discount = product.discount!;
+            final discount = product.discount??0;
             final discountedPrice = price - (price * discount / 100);
 
             return Scaffold(
@@ -67,7 +63,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                   children: [
                     // Product Image
                     Hero(
-                      tag: "product-image",
+                      tag: "product-image-${product.id}",
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16),
                         child: Image.network(
